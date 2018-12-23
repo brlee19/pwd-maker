@@ -1,24 +1,41 @@
 #!/usr/bin/env python3
 
-import sys, pyperclip, string, random
+import argparse
+import pyperclip
+import string
+import random
 
-# take in length as an arg
-# create random pwd of that length
-    # TODO: expand other options (whether to include letters, numbers, symbols)
-# print it
-# copy it into the clipboard
+def random_password(length=10, options={}):
+    chars = {
+        'lower': string.ascii_lowercase,
+        'upper': string.ascii_uppercase,
+        'num': string.digits,
+        'sym': string.punctuation,
+    }
+
+    if 'exclude' in options:
+        for exclusion in options['exclude']:
+            chars.pop(exclusion)
+
+    allowed_chars = ''.join(list(chars.values()))
+    return ''.join(random.choice(allowed_chars) for i in range(length))
 
 
-def random_password(length, options=None):
-    letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for i in range(length))
+def generate_password():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('password_length', type=int, nargs='?', help='password length, default is 10')
+    parser.add_argument('--no', action='append', choices=['lower', 'upper', 'num', 'sym'], help='characters to exclude')
+    args = parser.parse_args()
 
+    options = {
+        'exclude': args.no,
+    }
+    password = random_password(args.password_length or 10, options)
 
-def main():
-    password = random_password(10)
-    print(password)
     pyperclip.copy(password)
-    pyperclip.paste()
+    print(password)
+    return password
 
 
-main()
+if __name__ == '__main__':
+    generate_password()
