@@ -1,5 +1,5 @@
 # pwd-maker
-Because lastpass's generate password functionality in its chrome extension has been broken for, I made this simple CLI tool to create random passwords and copy them to the clipboard
+Because lastpass's generate password functionality in its chrome extension has been broken for months (for me anyway), I made this simple CLI tool to create random passwords and copy them to the clipboard.
 
 ```
 usage: main.py [-h] [--no {lower,upper,num,sym}] [password_length]
