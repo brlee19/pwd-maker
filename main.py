@@ -5,6 +5,7 @@ import pyperclip
 import string
 import random
 
+
 def random_password(length=10, options={}):
     chars = {
         'lower': string.ascii_lowercase,
@@ -18,7 +19,7 @@ def random_password(length=10, options={}):
             chars.pop(exclusion)
 
     allowed_chars = ''.join(list(chars.values()))
-    return ''.join(random.choice(allowed_chars) for i in range(length))
+    return ''.join(random.choice(allowed_chars) for _ in range(length))
 
 
 def generate_password():
@@ -28,7 +29,7 @@ def generate_password():
     args = parser.parse_args()
 
     options = {
-        'exclude': args.no,
+        'exclude': args.no or [],
     }
     password = random_password(args.password_length or 10, options)
 
