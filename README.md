@@ -11,3 +11,16 @@ optional arguments:
   -h, --help                    show this help message and exit
   --no {lower,upper,num,sym}    character sets to exclude
 ```
+
+
+To run this directly from Terminal, create a file like the below, somewhere in your $PATH...
+
+
+```
+# Call pwd-maker script
+
+cd /path/to/cloned-repo
+pipenv run python main.py "$@"
+```
+
+...and make it executable with `chmod +x`
